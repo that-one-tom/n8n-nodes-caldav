@@ -3,18 +3,21 @@ import {
 } from 'n8n-core';
 
 import {
+    ILoadOptionsFunctions,
 	INodeExecutionData,
+	INodePropertyOptions,
 	INodeType,
 	INodeTypeDescription,
 } from 'n8n-workflow';
 
 import {
-    DAVClient
-} from 'tsdav';
+    operationFields,
+} from './OperationDescription';
 
 import {
-    operationFields
-} from './OperationDescription';
+    getCalendars,
+    getEvents,
+} from './GenericFunctions';
 
 export class CalDav implements INodeType {
     description: INodeTypeDescription = {
@@ -44,6 +47,10 @@ export class CalDav implements INodeType {
                     {
                         name: 'Calendar',
                         value: 'calendar',
+                    },
+                    {
+                        name: 'Event',
+                        value: 'event',
                     }
                 ],
                 default: 'calendar',
@@ -55,34 +62,49 @@ export class CalDav implements INodeType {
         ]
     };
 
+    methods = {
+		loadOptions: {
+			async getCalendars(
+				this: ILoadOptionsFunctions,
+			): Promise<INodePropertyOptions[]> {
+				const returnData: INodePropertyOptions[] = [];
+				const calendars = await getCalendars.call(this);
+                
+                for (const calendar of calendars) {
+                    returnData.push({
+                        name: calendar.displayName as string,
+                        value: calendar.displayName as string,
+                    });
+                }
+				return returnData;
+			},
+		},
+	};
+
     async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
         // const items = this.getInputData();
         const resource = this.getNodeParameter('resource', 0) as string;
         const operation = this.getNodeParameter('operation', 0) as string;
-        const credentials = await this.getCredentials('calDavBasicAuth');
         const results = [];
 
         if (resource === 'calendar' && operation === 'getMany') {
-            const client = new DAVClient({
-                serverUrl: credentials.serverUrl as string,
-                credentials: {
-                  username: credentials.username as string,
-                  password: credentials.password as string,
-                },
-                authMethod: 'Basic',
-                defaultAccountType: 'caldav',
-            });
-    
-            try {
-                await client.login();
-                const calendars = await client.fetchCalendars();
-                for (const calendar of calendars) {
-                    results.push({
-                        json: calendar as any,
-                    })
-                }
-            } catch (error) {
-                throw new Error(error);
+            const calendars = await getCalendars.call(this);
+            for (const calendar of calendars) {
+                results.push({
+                    json: calendar as any,
+                });
+            }
+        } else if (resource === 'event' && operation === 'getMany') {
+            const events = await getEvents.call(
+                this,
+                this.getNodeParameter('calendar', 0) as string,
+                this.getNodeParameter('start', 0) as string,
+                this.getNodeParameter('end', 0) as string
+            );
+            for (const event of events) {
+                results.push({
+                    json: event as any,
+                });
             }
         }
 

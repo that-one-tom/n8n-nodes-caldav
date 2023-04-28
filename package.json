@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-caldav",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Tom's attempt to build a CalDAV client node for n8n.",
   "keywords": [
     "n8n-community-node-package"
@@ -299,6 +299,7 @@
     "natural-compare": "^1.4.0",
     "next-tick": "^1.1.0",
     "no-case": "^3.0.4",
+    "node-ical": "^0.16.0",
     "normalize-package-data": "^2.5.0",
     "normalize-path": "^3.0.0",
     "now-and-later": "^2.0.1",
