@@ -10,6 +10,11 @@ This node is currently work in progress. It's a bad idea to use it right now.
 
 # Changelog
 
+## 0.2.2
+2023-04-28
+
+* Version bump to clean up dist folder before publishing on npm
+
 ## 0.2.1
 2023-04-28
 
