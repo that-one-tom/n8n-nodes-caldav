@@ -6,4 +6,4 @@ This node is currently work in progress and has therefore not been published to 
 
 # Screenshot
 
-![Screenshot](./img/screenshot.png)
+![Screenshot](./img/screenshot.jpg)
