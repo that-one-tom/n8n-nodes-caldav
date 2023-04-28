@@ -1,3 +1,6 @@
+/* eslint-disable n8n-nodes-base/node-param-description-wrong-for-dynamic-options */
+/* eslint-disable n8n-nodes-base/node-param-display-name-wrong-for-dynamic-options */
+
 import {
 	INodeProperties
 } from 'n8n-workflow';
@@ -7,6 +10,7 @@ export const operationFields: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+        noDataExpression: true,
         displayOptions: {
             show: {
                 resource: [
@@ -19,11 +23,11 @@ export const operationFields: INodeProperties[] = [
             {
                 name: 'Get Many',
                 value: 'getMany',
+                action: 'Get multiple available calendars',
             },
         ],
         default: 'getMany',
         required: true,
-        description: 'The operation to perform.',
     },
     {
         displayName: 'Calendar',
@@ -43,7 +47,7 @@ export const operationFields: INodeProperties[] = [
             },
         },
         default: '',
-        description: 'The calendar to fetch events from.',
+        description: 'The calendar to fetch events from',
         required: true,
     },
     {
@@ -61,7 +65,7 @@ export const operationFields: INodeProperties[] = [
             },
         },
         default: '={{ $now.toISO() }}',
-        description: 'The lower bound of the time range to get events for.',
+        description: 'The lower bound of the time range to get events for',
     },
     {
         displayName: 'End',
@@ -78,6 +82,6 @@ export const operationFields: INodeProperties[] = [
             },
         },
         default: '={{ $now.plus({ day: 30 }).toISO() }}',
-        description: 'The upper bound of the time range to get events for.',
+        description: 'The upper bound of the time range to get events for',
     }
 ];

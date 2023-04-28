@@ -27,6 +27,7 @@ module.exports = {
 			extends: ['plugin:n8n-nodes-base/community'],
 			rules: {
 				'n8n-nodes-base/community-package-json-name-still-default': 'off',
+				'n8n-nodes-base/community-package-json-license-not-default': 'off',
 			},
 		},
 		{

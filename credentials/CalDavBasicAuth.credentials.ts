@@ -1,3 +1,7 @@
+/* eslint-disable n8n-nodes-base/cred-class-name-unsuffixed */
+/* eslint-disable n8n-nodes-base/cred-class-field-display-name-missing-api */
+/* eslint-disable n8n-nodes-base/cred-class-field-name-unsuffixed */
+
 import {
 	ICredentialType,
 	INodeProperties,

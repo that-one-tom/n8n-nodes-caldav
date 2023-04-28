@@ -1,13 +1,16 @@
 {
   "name": "n8n-nodes-caldav",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Tom's attempt to build a CalDAV client node for n8n.",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "GPL-3.0-or-later",
-  "homepage": "",
-  "author": "Thomas Martens <thomas@thomasmartens.eu>",
+  "homepage": "https://github.com/that-one-tom/n8n-nodes-caldav",
+  "author": {
+    "name": "Thomas Martens",
+    "email": "thomas@thomasmartens.eu"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/that-one-tom/n8n-nodes-caldav.git"

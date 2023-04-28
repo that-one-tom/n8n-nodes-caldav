@@ -1,3 +1,5 @@
+/* eslint-disable n8n-nodes-base/node-class-description-credentials-name-unsuffixed */
+
 import {
 	IExecuteFunctions,
 } from 'n8n-core';
@@ -26,6 +28,7 @@ export class CalDav implements INodeType {
         icon: 'file:calDav.svg',
         group: ['output'],
         version: 1,
+        subtitle: '={{ $parameter["operation"] + ": " + $parameter["resource"] }}',
         description: 'Connect n8n to a CalDAV server',
         defaults: {
             name: 'CalDAV',
@@ -56,7 +59,6 @@ export class CalDav implements INodeType {
                 default: 'calendar',
                 noDataExpression: true,
                 required: true,
-                description: 'The resource to operate on.',
             },
             ...operationFields,
         ]
